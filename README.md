@@ -25,5 +25,7 @@
 
 ##Chainerのcaffeモデルの読み込みが遅い
 https://github.com/karaage0703/deeplearning-learning
+<br>
 http://d.hatena.ne.jp/shi3z/20151128/1448669876
+<br>
 
