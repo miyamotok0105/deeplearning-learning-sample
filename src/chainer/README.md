@@ -1,4 +1,11 @@
 
+#インストール
+
+python2.7
+chainer1.7
+
+	
+	pip install chainer==1.7
 
 #コンバード
 
