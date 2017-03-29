@@ -1,7 +1,7 @@
 # deeplearning-learning-sample
 
 
-#Download ImgeNet2012 image file name and label list
+# Download ImgeNet2012 image file name and label list
 
     cd
     git clone https://github.com/BVLC/caffe.git
@@ -9,7 +9,7 @@
     ./get_ilsvrc_aux.sh 
 
 
-#Import Caffe model
+# Import Caffe model
 
 
     cd
@@ -21,7 +21,7 @@
 
 
 
-#Inspired by
+# Inspired by
 
 ##Chainerのcaffeモデルの読み込みが遅い
 https://github.com/karaage0703/deeplearning-learning
