@@ -12,9 +12,15 @@ https://deepage.net/bigdata/machine_learning/2016/08/28/fast_text_facebook.html
     git clone https://github.com/facebookresearch/fastText.git
     cd fastText
     make
-   
-# train
+  
+# Text classification 
+## train
 
-  ./fasttext supervised -input ../livedoor_train.txt -output livedoor_result -dim 10 -lr 0.1 -wordNgrams 2 -minCount 1 -bucket 10000000 -epoch 100 -thread 4
+    ./fasttext supervised -input ../livedoor_train.txt -output livedoor_result -dim 10 -lr 0.1 -wordNgrams 2 -minCount 1 -bucket 10000000 -epoch 100 -thread 4
+
+## test
+
+    ./fasttext predict livedoor_result.bin test.txt 1
+
 
 
