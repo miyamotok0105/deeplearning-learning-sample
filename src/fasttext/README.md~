@@ -1,0 +1,15 @@
+# fasttext sample
+
+https://deepage.net/bigdata/machine_learning/2016/08/28/fast_text_facebook.html
+
+# setup
+
+    wget http://www.rondhuit.com/download/ldcc-20140209.tar.gz
+    tar -zxvf ldcc-20140209.tar.gz
+    python livedoor.py > livedoor.txt
+    python rand_split.py
+
+    git clone https://github.com/facebookresearch/fastText.git
+    cd fastText
+    make
+
