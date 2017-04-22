@@ -9,8 +9,7 @@ chainer1.7<br>
 
 # コンバート
 
-    python convert_caffe_to_chainer.py bvlc_reference_caffenet.caffemodel bvlc_reference_chainermodel.pkl
-
+    python convert_caffe_to_chainer.py ../../model/bvlc_alexnet.caffemodel ../../model/bvlc_reference_chainermodel.pkl
 
 # caffemodelで実行
 
