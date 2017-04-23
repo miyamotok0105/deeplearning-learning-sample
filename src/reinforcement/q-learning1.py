@@ -3,6 +3,9 @@
 Created on Thu May  5, 2016
 
 @author: jonki
+
+python2.7
+
 """
 
 import numpy as np
@@ -10,31 +13,32 @@ import random
 import sys
 
 
-# Reward matrix
-R = np.array([
-[-1, -1, -1, -1,  0,  -1],
-[-1, -1, -1,  0, -1, 100],
-[-1, -1, -1,  0, -1,  -1],
-[-1,  0,  0, -1,  0,  -1],
-[ 0, -1, -1,  0, -1, 100],
-[-1,  0, -1, -1,  0, 100]
-])
-
-# Initial Q-value
-Q = np.zeros((6,6))
-
-LEARNING_COUNT = 1000
-GAMMA = 0.8
-GOAL_STATE = 5
-
 class QLearning(object):
     def __init__(self):
+
+        # Reward matrix
+        self.R = np.array([
+        [-1, -1, -1, -1,  0,  -1],
+        [-1, -1, -1,  0, -1, 100],
+        [-1, -1, -1,  0, -1,  -1],
+        [-1,  0,  0, -1,  0,  -1],
+        [ 0, -1, -1,  0, -1, 100],
+        [-1,  0, -1, -1,  0, 100]
+        ])
+
+        # Initial Q-value
+        self.Q = np.zeros((6,6))
+
+        self.LEARNING_COUNT = 1000
+        self.GAMMA = 0.8
+        self.GOAL_STATE = 5
+
         return
         
     def learn(self):
         # set a start state randomly
         state = self._getRandomState()
-        for i in range(LEARNING_COUNT):        
+        for i in range(self.LEARNING_COUNT):        
             # extract possible actions in state
             possible_actions = self._getPossibleActionsFromState(state)
             
@@ -46,31 +50,31 @@ class QLearning(object):
             next_state = action # in this example, action value is same as next state
             next_possible_actions = self._getPossibleActionsFromState(next_state)
             max_Q_next_s_a = self._getMaxQvalueFromStateAndPossibleActions(next_state, next_possible_actions)
-            Q[state, action] = R[state, action] + GAMMA * max_Q_next_s_a
+            self.Q[state, action] = self.R[state, action] + self.GAMMA * max_Q_next_s_a
             
             state = next_state
             
             # If an agent reached a goal state, restart an episode from a random start state
-            if state == GOAL_STATE:
+            if state == self.GOAL_STATE:
                 state = self._getRandomState()
     
     def _getRandomState(self):
-        return random.randint(0, R.shape[0] - 1)
+        return random.randint(0, self.R.shape[0] - 1)
       
     def _getPossibleActionsFromState(self, state):
-        if state < 0 or state >= R.shape[0]: sys.exit("invaid state: %d" % state)
-        return list(np.where(np.array(R[state] != -1)))[0]
+        if state < 0 or state >= self.R.shape[0]: sys.exit("invaid state: %d" % state)
+        return list(np.where(np.array(self.R[state] != -1)))[0]
     
     def _getMaxQvalueFromStateAndPossibleActions(self, state, possible_actions):
-        return max([Q[state][i] for i in (possible_actions)])
+        return max([self.Q[state][i] for i in (possible_actions)])
             
     def dumpQvalue(self):
-        print Q.astype(int) # convert float to int for redability
+        print self.Q.astype(int) # convert float to int for redability
 
     def runGreedy(self, start_state = 0):
         print "===== START ====="
         state = start_state
-        while state != GOAL_STATE:
+        while state != self.GOAL_STATE:
             print "current state: %d" % state
             possible_actions = self._getPossibleActionsFromState(state)
             
@@ -78,10 +82,10 @@ class QLearning(object):
             max_Q = 0
             best_action_candidates = []
             for a in possible_actions:            
-                if Q[state][a] > max_Q:
+                if self.Q[state][a] > max_Q:
                     best_action_candidates = [a,]
-                    max_Q = Q[state][a]
-                elif Q[state][a] == max_Q:
+                    max_Q = self.Q[state][a]
+                elif self.Q[state][a] == max_Q:
                     best_action_candidates.append(a)
             
             print("best_action_candidates:", best_action_candidates)
@@ -97,8 +101,8 @@ if __name__ == "__main__":
     
     QL.dumpQvalue()
     
-    for s in range(R.shape[0]-1):
+    for s in range(QL.R.shape[0]-1):
         print("s ",s)
-        print("env is ", R.shape)
+        print("env is ", QL.R.shape)
         QL.runGreedy(s)
 
