@@ -23,3 +23,5 @@
 *.jpg
 *.jpeg
 *.png
+*.npz
+openaigym.*
