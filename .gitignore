@@ -25,3 +25,7 @@
 *.png
 *.npz
 openaigym.*
+*.gz
+*.dot
+*.model
+*.state
